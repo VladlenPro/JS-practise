@@ -1,8 +1,8 @@
 let timeLAnswer = document.getElementById("timeLabel");
 let clickAverage = document.getElementById("average");
+let timeStamps = [];
 let time = null;
-let timeSum = 0;
-let count = 0;
+const numberOfTimeStamps = 10;
 
 function timeStamp() {
     if (time === null) {
@@ -10,18 +10,19 @@ function timeStamp() {
     } else {
         let timeDiffrance = Math.abs((new Date() - time) / 1000)
         timeLAnswer.innerText = `${timeDiffrance} Seconds`;
-        timeSum += timeDiffrance;
-        count++
-        if (count === 10) {
-            clickTimeAverage();
-        }
+        timeStamps.push(timeDiffrance);
+        clickTimeAverage(numberOfTimeStamps);
         time = null;
     }
 }
 
-function clickTimeAverage() {
-    let average = timeSum / count;
-    clickAverage.innerText = `average of your clicks is ${average} seconds`;
-    count = 0;
-    timeSum = 0;
+function clickTimeAverage(number) {
+    let timeSum = 0;
+    if (timeStamps.length > number) {
+        timeStamps.shift();
+    }
+    timeStamps.forEach(element => {
+        timeSum += element;
+    });
+    clickAverage.innerText = `average of your last ${timeStamps.length} clicks is ${timeSum/timeStamps.length} seconds`;
 }
