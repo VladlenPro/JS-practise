@@ -1,0 +1,15 @@
+/** @format */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.border {
+  text-align: center;
+  height: 22px;
+  width: 100px;
+  box-sizing: content-box;
+
+  background-color: red;
+  border: black 2px solid;
+}
